@@ -1,5 +1,8 @@
 const router = require('express').Router();
-router.get('/', (req, res) => {
-  res.send('i am working');
+const { runScraper } = require('../lib/index');
+router.get('/', async (req, res) => {
+  const { search } = req.body;
+  const bestPrice = await runScraper(search);
+  res.send(bestPrice);
 });
 module.exports = router;
